@@ -15,11 +15,33 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::truncate();
+
+        $this->call([
+            BranchSeeder::class,
+            ProductSeeder::class,
+        ]);
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin User',
+            'email' => 'admin@peda.com',
+            'role' => 'admin',
         ]);
+
+        User::factory()->create([
+            'name' => 'Manager User',
+            'email' => 'manager@peda.com',
+            'role' => 'manager',
+            'branch_id' => 1,
+        ]);
+
+        User::factory()->create([
+            'name' => 'Worker User',
+            'email' => 'worker@peda.com',
+            'role' => 'worker',
+            'branch_id' => 1,
+        ]);
+
+
     }
 }
